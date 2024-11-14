@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+<body>
+    <h1>Event Management</h1>
+    <a href="{{ url_for('add_event') }}">Add New Event</a><br><br>
+
+    {% for event in events %}
+        <div>
+            <h2>{{ event.title }}</h2>
+            <img src="{{ url_for('static', filename='images/' + event.image_filename) }}" alt="{{ event.title }}" style="width: 200px;">
+            <p>{{ event.description }}</p>
+        </div>
+    {% else %}
+        <p>No events found.</p>
+    {% endfor %}
+</body>
+</html>
