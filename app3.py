@@ -14,8 +14,9 @@ import os
 # Email server configuration
 SERVER = 'smtp.gmail.com'
 PORT = 587
-FROM_EMAIL = 'ranjithpython072@gmail.com'  # Replace with your email
-PASSWORD = 'ptus saxt qigq edoe'           # Replace with your app-specific password
+FROM_EMAIL = os.environ.get('FROM_EMAIL')  # Fetches the FROM_EMAIL value
+PASSWORD = os.environ.get('PASSWORD')      # Fetches the PASSWORD value
+# Replace with your app-specific password
 
 # Streamlit UI
 st.title("Automated Email Invoice Tool")
@@ -52,9 +53,9 @@ def generate_proforma_invoice(data, pdf_path="proforma_invoice.pdf"):
     c.setFont("Helvetica-Bold", 10)
     c.drawString(40, height - 130, "TO")
     c.setFont("Helvetica", 10)
-    c.drawString(50,height - 145,data['Company Name'])
-    c.drawString(50, height - 160,data['Address'])
-    c.drawString(50, height - 175,data['Pincode'])
+    c.drawString(40,height - 145,data['Company Name'])
+    c.drawString(40, height - 160,data['Address'])
+    c.drawString(40, height - 175,data['Pincode'])
     # Client GST Number
 
     # Subject Line
@@ -64,7 +65,7 @@ def generate_proforma_invoice(data, pdf_path="proforma_invoice.pdf"):
 
     # Website Renewal Details Information
     c.setFont("Helvetica", 10)
-    c.drawString(40, height - 280, "PLEASE FIND BELOW THE DETAILS FOR TOWARDS RENEWAL OF WEBSITE")
+    c.drawString(40, height - 280, "PLEASE FIND BELOW DETAILS TOWARDS RENEWAL OF WEBSITE")
 
     # Table for Service Details
     service_data = [
@@ -136,6 +137,8 @@ def generate_proforma_invoice(data, pdf_path="proforma_invoice.pdf"):
 
     c.drawCentredString(width /2, 30, "Archer Websol,Door No: 8/19, Annal Gandhi Cross Street,Vetrinagar, Perambur, Chennai-600082 ,")
     c.drawCentredString(width /2,15 ,"Email: archerwebsol2024@gmail.com,Phone: +91-44-48588105, +91-8056109699, +91-9790740735")
+    c.setFont("Helvetica", 8)
+    c.drawRightString(width - 27, height - 790,"** This is online auto generated proforma invoice **")
     # Save the PDF
     c.save()
     return pdf_path
