@@ -178,7 +178,7 @@ if uploaded_file:
                     if data['has_paid'].strip().lower() == 'no':
                         # Generate reminder email content
                         message_body = f"""
-                        Dear {data['Company Name']},
+                        Dear Sir/Madam,
 
                         Greetings from Archer Websol...
 
